@@ -14,6 +14,7 @@ function NavBar() {
 
     return(
         <nav>
+            <h1 style ={{ color: "#e50914" }}>Movies FullStack App</h1>
             <ul>
                 <li>
                     <Link to ="/"> Home </Link>
@@ -23,7 +24,7 @@ function NavBar() {
                 </li>
             </ul>
 
-            <button onClick={handleClick}> Switch theme:{theme} </button>
+            <button onClick={handleClick}> Current theme: {theme} </button>
         </nav>
     )
 }

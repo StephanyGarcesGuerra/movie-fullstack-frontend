@@ -11,6 +11,7 @@ function MainPage () {
 
     const emailInputref = useRef(null);
     const passwordInputRef = useRef(null);
+
     const [showSignUp, setShowSignUp] = useState(false);
 
     const handleSignIn = async (e)=>{
@@ -33,6 +34,7 @@ function MainPage () {
             password: passwordInputRef.current.value
         });
         console.log(res.data);
+        setUser(res.data);
     }
 
     const handleSignUp = async(e)=>{
@@ -55,6 +57,7 @@ function MainPage () {
             password: passwordInputRef.current.value
         });
         console.log(res.data);
+        setUser(res.data);
     }
 
     return (
@@ -70,7 +73,8 @@ function MainPage () {
                     display:'flex', 
                     flexDirection:'column', 
                     padding: '10px',
-                }}>
+                 }}
+                >
 
                     <h3> Sign in </h3>
 
