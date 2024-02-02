@@ -1,24 +1,66 @@
-import logo from './logo.svg';
+import {useEffect, useState} from "react";
+import { Route, Routes } from "react-router-dom";
 import './App.css';
+import MoviesList from "./components/MoviesList";
+import MainPage from "./pages/MainPage";
+import NavBar from "./components/NavBar";
+import MovieDetails from "./components/MovieDetails";
+
+import { ThemeContext } from "./context/ThemeContext";
+import { UserContext } from "./context/UserContext";
 
 function App() {
+
+  //* if the useState is null instead of [], need to add movies && movies.map
+  //* on the MovieList component file
+  const [movies,setMovies] = useState([]);
+  const [theme, setTheme] = useState('light');
+  const [user,setUser] = useState(null);
+
+  //* useEffect: first parameter is a callback function, second is an array with the dependencies
+  useEffect(()=>{
+    //* connect to the backend callback function
+    const fetchData = async () => {
+      const res = await fetch('http://localhost:4000/api/movies')
+      const data = await res.json();
+      console.log(data);
+
+      //* set data to the state movies variable, will trigger a rerender
+      setMovies(data);
+    }
+    fetchData(); //* call function
+
+  }, []);
+
+  //* anything outside the route tags will always show
   return (
+   <UserContext.Provider value = {{user,setUser}} >
+   <ThemeContext.Provider value ={{theme, setTheme}}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <h1> Movies Directory</h1>
+      <h3> Full Stack App</h3>
+      <br/>
+      <br/>
+      {user ? (
+      <>
+      <NavBar />
+      <br/>
+
+      <Routes> 
+        <Route path="/" element= {<MainPage />} />
+        <Route path ='/movies' element= {< MoviesList movies={movies} />}/>
+        <Route path ='/movies/:id' element={ <MovieDetails /> }/>
+      </Routes>
+      </>
+
+  ) : (
+    <MainPage />
+  )}
+  
     </div>
+    </ThemeContext.Provider>
+    </UserContext.Provider>
   );
 }
 
