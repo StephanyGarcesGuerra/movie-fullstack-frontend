@@ -12,7 +12,7 @@ function MovieDetails (){
         //* function to fetch movie by ID with try and catch
         const fetchData = async ()=>{
             try {
-                const res = await fetch(`http://localhost:4000/api/movies/${params.id}`);
+                const res = await fetch(`https://movie-fullstack-backend-4bqg.onrender.com/api/movies/${params.id}`);
                 const data = await res.json();
                 console.log(data);
                 setMovie(data);

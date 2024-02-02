@@ -8,7 +8,7 @@ function MainPage () {
 
     const userCtx = useContext(UserContext);
     const {setUser} = userCtx;
-    
+
     const emailInputref = useRef(null);
     const passwordInputRef = useRef(null);
     const [showSignUp, setShowSignUp] = useState(false);
@@ -28,7 +28,7 @@ function MainPage () {
         }
 
         //* POST request to backend
-        const res = await axios.post('http://localhost:4000/api/users/signin', {
+        const res = await axios.post('https://movie-fullstack-backend-4bqg.onrender.com/api/users/signin', {
             email: emailInputref.current.value,
             password: passwordInputRef.current.value
         });
@@ -50,7 +50,7 @@ function MainPage () {
         }
 
         //* POST request to backend
-        const res = await axios.post('http://localhost:4000/api/users/signup', {
+        const res = await axios.post('https://movie-fullstack-backend-4bqg.onrender.com/api/users/signup', {
             email: emailInputref.current.value,
             password: passwordInputRef.current.value
         });

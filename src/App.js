@@ -21,7 +21,7 @@ function App() {
   useEffect(()=>{
     //* connect to the backend callback function
     const fetchData = async () => {
-      const res = await fetch('http://localhost:4000/api/movies')
+      const res = await fetch('https://movie-fullstack-backend-4bqg.onrender.com/api/movies')
       const data = await res.json();
       console.log(data);
 
